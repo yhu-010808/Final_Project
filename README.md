@@ -15,7 +15,15 @@ One of the innovative aspects of this project is the combination of Monte Carlo 
 
 # 2. Methodology
 
+  ## 2.1 Monte Carlo Simulation
+  ## 2.2 Machine Learning
+
+
+  
 # 3. Code Logic
+
+ ## 3.1 Monte Carlo Simulation
+ ## 3.2 Machine Learning
 
 # 4. Future Direction
 
