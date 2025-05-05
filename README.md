@@ -54,7 +54,7 @@ This approach allows us to study the system’s behavior under various interacti
 ### Analysis and Visualization
 - **Potential Energy**: The total energy per particle is tracked during the simulation to observe system convergence.
 - **Radial Distribution Function (RDF)**: The RDF is computed to analyze local ordering and identify phase transitions (gas-like, liquid-like, crystalline).
-- **Particle Configurations**: Snapshots of particle positions are saved and visualized as animations to show the evolution of the system.
+- **Particle Configurations**: Snapshots of particle positions are saved and visualized as animations to show the evolution of the system (these gif plots can be obtained through Colab).
 
 
  ## 3.2 Machine Learning
