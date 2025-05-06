@@ -1,3 +1,17 @@
+"""
+Neural Network-Based Lennard-Jones Potential Prediction System.
+
+This module performs a Monte Carlo simulation of particle interactions 
+using the Lennard-Jones potential. It then trains a neural network 
+to predict the system's potential energy based on particle positions.
+
+An improved version of the system also explores using **pairwise distances (inter-particle distances)** 
+as input features to achieve better symmetry properties and improved model performance.
+
+Author: [Yinan HU]
+Date: [06/05/2025]
+"""
+
 # Import necessary libraries
 import numpy as np
 import matplotlib.pyplot as plt
