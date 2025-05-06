@@ -1,4 +1,3 @@
-
 import numpy as np
 import matplotlib.pyplot as plt
 import torch
@@ -101,13 +100,6 @@ for istep in range(MCsteps):
     if istep % 100 == 0:
         pos_save.append(pos.copy())
 
-# Plot the potential energy
-plt.plot(Epot_save, label="Epot", linestyle="-")
-plt.legend()
-plt.xlabel("MC Steps")
-plt.ylabel("Potential energy per particle")
-plt.title("Monte Carlo Simulation")
-plt.show()
 
 # Save positions and energies for neural network training
 positions = np.array(positions)
