@@ -179,7 +179,8 @@ Both ML and ML_Improved follow the same **general workflow**:
     - **Translation invariance**.
     - **Rotation invariance**.
     - **Permutation invariance** (robust to particle index changes).
- 
+
+Note: all the plots can be obtained through Colab.
 
 # 4. Future Direction
 **Physics-Informed Neural Networks (PINNs)**  
