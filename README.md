@@ -38,9 +38,7 @@ To overcome the limitations of the traditional Monte Carlo method—specifically
 
 **Machine Learning (ML)** refers to algorithms that can learn patterns from data. In this project, the ML model learns to predict the potential energy of particle configurations without explicitly recalculating the LJ energy each time. Once trained, the model can make rapid energy predictions, significantly speeding up the simulation.
 
-
-
-##ML Model Using Particle Positions as Input
+ML Model Using Particle Positions as Input
 
 ### Objective  
 Train a neural network that can predict the potential energy of a particle configuration based on particle positions.
