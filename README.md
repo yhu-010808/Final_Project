@@ -207,7 +207,7 @@ Both ML and ML_Improved follow the same **general workflow**:
 
 ## Final Summary
 
-*"Our project successfully demonstrated that combining Monte Carlo sampling with machine learning significantly accelerates energy prediction. By improving our input features and exploring advanced ML techniques, this approach can be extended to complex materials, quantum-level simulations, and biological systems in the future."*
+Our project successfully demonstrated that combining Monte Carlo sampling with machine learning significantly accelerates energy prediction. By improving our input features and exploring advanced ML techniques, this approach can be extended to complex materials, quantum-level simulations, and biological systems in the future.
 
 
 
