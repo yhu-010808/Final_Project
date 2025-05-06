@@ -32,6 +32,96 @@ This approach allows us to study the system’s behavior under various interacti
 
   ## 2.2 Machine Learning
 
+  # 3.2 Machine Learning
+
+## Introduction to ML
+
+To overcome the limitations of the traditional Monte Carlo method—specifically, the computational expense of recalculating the Lennard-Jones (LJ) energy for every particle move—we introduced **Machine Learning (ML)** to accelerate energy predictions.
+
+**Machine Learning (ML)** refers to algorithms that can learn patterns from data. In this project, the ML model learns to predict the potential energy of particle configurations without explicitly recalculating the LJ energy each time. Once trained, the model can make rapid energy predictions, significantly speeding up the simulation.
+
+---
+
+##ML Model Using Particle Positions as Input
+
+### Objective  
+Train a neural network that can predict the potential energy of a particle configuration based on particle positions.
+
+### Workflow
+
+**Monte Carlo Sampling**  
+- Perform a Monte Carlo simulation to generate various particle configurations by randomly perturbing particle positions.
+- Each new configuration is accepted or rejected based on the Metropolis criterion.
+
+**Saving Training Data**  
+- For each accepted configuration:  
+  - **Input** → Flattened particle positions (x, y for all particles).  
+  - **Output (label)** → Corresponding LJ energy.
+
+**Data Normalization and Splitting**  
+- Normalize position and energy data to improve training stability.
+- Split the dataset into **training** and **testing** sets.
+
+**Neural Network Construction**  
+- Define a **feedforward neural network** using PyTorch:  
+  - **Input layer**: Particle positions (**2 × Np dimensions**).  
+  - **Hidden layers**: Two layers with 40 neurons each, using ReLU activation.  
+  - **Output layer**: Predicted potential energy.
+
+**Training the Neural Network**  
+- Loss function: **Mean Squared Error (MSE)**.  
+- Optimizer: **Stochastic Gradient Descent (SGD)** with momentum.
+- Train the network to minimize the difference between predicted and actual LJ energies.
+
+**Model Evaluation**  
+- Compare predicted energies against actual LJ energies using scatter plots.
+- **Observations**:
+  - Slow convergence.
+  - Higher prediction error.
+  - Sensitivity to input representation (absolute positions are sensitive to translation and rotation).
+
+---
+
+## Improved ML Model: Using Inter-Particle Distances 
+
+### Motivation  
+The limitations of using absolute positions motivated us to improve the model by using **inter-particle distances** as the input feature.
+
+**Advantages of Distances as Input**:
+- **Translation invariance**: Moving the entire system does not change the distances.
+- **Rotation invariance**: Rotating the system does not affect distances.
+- **Permutation invariance**: Swapping particle labels does not change the input.
+
+### Key Modifications
+
+1️⃣ **New Input Representation**  
+- Compute and use **all pairwise inter-particle distances**.  
+- Distances are **sorted** to maintain consistent input order.  
+- Input dimension: \( Np \times (Np - 1) / 2 \).
+
+2️⃣ **Updated Training Data**  
+- **Input** → Sorted inter-particle distances.  
+- **Output (label)** → Corresponding LJ energy.
+
+3️⃣ **Normalization and Splitting**  
+- Normalize distances and energies.
+- Use larger training and testing datasets.
+
+4️⃣ **Neural Network Construction**  
+- Same architecture as Task 2(a), except:  
+  - **Input layer** takes distance vectors instead of position vectors.
+
+5️⃣ **Training and Evaluation**  
+- The model converges **faster** and achieves **lower prediction errors** compared to the position-based model.
+- Scatter plots confirm better alignment between predicted and actual energies.
+
+---
+
+
+
+---
+
+
 
 # 3. Code Logic
 
@@ -59,7 +149,50 @@ This approach allows us to study the system’s behavior under various interacti
 
  ## 3.2 Machine Learning
 
+Both tasks follow the same **general workflow**:
+
+1. **Generate Configurations via Monte Carlo (MC)**
+    - Initialize particles on a grid.
+    - At each MC step:
+        - Randomly select a particle and propose a new position.
+        - Calculate the energy change (ΔE) using the Lennard-Jones (LJ) potential.
+        - Accept or reject the new configuration based on the Metropolis criterion.
+
+2. **Save Data for ML Training**
+    - For each accepted configuration:
+        - **ML**: Save flattened particle positions as input.
+        - **ML_Improved**: Calculate all pairwise distances and save as input.
+        - Save the LJ energy as the output (label).
+
+ 
+
 # 4. Future Direction
+**Physics-Informed Neural Networks (PINNs)**  
+- Integrate physical laws (e.g., conservation, symmetries) directly into the network architecture or loss function.
+
+**Active Learning**  
+- Dynamically collect new training data during simulations to improve model generalization.
+
+**Transfer Learning**  
+- Transfer trained models to different systems (e.g., larger particle numbers, different interaction types).
+
+**Graph Neural Networks (GNNs)**  
+- Use graph-based architectures to capture complex spatial relationships between particles.
+
+**ML-Accelerated MC Move Proposals**  
+- Use reinforcement learning or generative models to suggest more efficient particle moves during MC sampling.
+
+**Coupling with Quantum Calculations**  
+- Train ML models on **DFT-calculated energies** to capture quantum-level accuracy.
+
+**Applications to Biomolecular Systems**  
+- Extend the ML-MC framework to study **protein folding** or **complex biomolecular assemblies**.
+
+## Final Summary
+
+*"Our project successfully demonstrated that combining Monte Carlo sampling with machine learning significantly accelerates energy prediction. By improving our input features and exploring advanced ML techniques, this approach can be extended to complex materials, quantum-level simulations, and biological systems in the future."*
+
+
 
 # 5. Authors
 Maxine Wang: https://github.com/Maxine-wang-7
