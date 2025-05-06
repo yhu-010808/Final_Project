@@ -141,21 +141,46 @@ The limitations of using absolute positions motivated us to improve the model by
 
  ## 3.2 Machine Learning
 
-Both tasks follow the same **general workflow**:
+Both ML and ML_Improved follow the same **general workflow**:
+#### **Data Preparation**
+- **Inputs**: Flattened particle positions (length = 2 × Np).
+- **Labels**: Lennard-Jones (LJ) energies computed from MC sampling.
+- **Preprocessing**:
+    - Normalize both position data and energies.
+    - Split into **training** and **test** sets.
 
-1. **Generate Configurations via Monte Carlo (MC)**
-    - Initialize particles on a grid.
-    - At each MC step:
-        - Randomly select a particle and propose a new position.
-        - Calculate the energy change (ΔE) using the Lennard-Jones (LJ) potential.
-        - Accept or reject the new configuration based on the Metropolis criterion.
+#### **Neural Network Architecture**
+- **Framework**: PyTorch.
+- **Input layer**: 2 × Np neurons (for particle positions).
+- **Hidden layers**: 
+    - 2 hidden layers, each with 40 neurons.
+    - Activation function: **ReLU** (Rectified Linear Unit).
+- **Output layer**: 1 neuron predicting the total potential energy.
 
-2. **Save Data for ML Training**
-    - For each accepted configuration:
-        - **ML**: Save flattened particle positions as input.
-        - **ML_Improved**: Calculate all pairwise distances and save as input.
-        - Save the LJ energy as the output (label).
+#### **Training**
+- **Loss function**: Mean Squared Error (MSE).
+- **Optimizer**: Stochastic Gradient Descent (SGD) with momentum.
+- **Epochs**: 10,000.
+- The model learns to minimize the difference between predicted and true energies.
 
+#### **Results**
+- The model can predict LJ energies from particle positions.
+- **Limitations**:
+    - Training convergence is slow.
+    - Prediction error is relatively high.
+    - Model is sensitive to translation, rotation, and particle indexing because of absolute position inputs.
+
+
+### Improved Neural Network Using Inter-Particle Distances
+
+#### **Key Improvement**
+- **Input change**: 
+    - Instead of positions, use **sorted inter-particle distances**.
+    - Input size = Np × (Np - 1) / 2.
+- **Advantages**:
+    - **Translation invariance**.
+    - **Rotation invariance**.
+    - **Permutation invariance** (robust to particle index changes).
  
 
 # 4. Future Direction
