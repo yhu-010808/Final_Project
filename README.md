@@ -32,15 +32,13 @@ This approach allows us to study the system’s behavior under various interacti
 
   ## 2.2 Machine Learning
 
-  # 3.2 Machine Learning
-
 ## Introduction to ML
 
 To overcome the limitations of the traditional Monte Carlo method—specifically, the computational expense of recalculating the Lennard-Jones (LJ) energy for every particle move—we introduced **Machine Learning (ML)** to accelerate energy predictions.
 
 **Machine Learning (ML)** refers to algorithms that can learn patterns from data. In this project, the ML model learns to predict the potential energy of particle configurations without explicitly recalculating the LJ energy each time. Once trained, the model can make rapid energy predictions, significantly speeding up the simulation.
 
----
+
 
 ##ML Model Using Particle Positions as Input
 
@@ -80,7 +78,7 @@ Train a neural network that can predict the potential energy of a particle confi
   - Higher prediction error.
   - Sensitivity to input representation (absolute positions are sensitive to translation and rotation).
 
----
+
 
 ## Improved ML Model: Using Inter-Particle Distances 
 
@@ -114,12 +112,6 @@ The limitations of using absolute positions motivated us to improve the model by
 5️⃣ **Training and Evaluation**  
 - The model converges **faster** and achieves **lower prediction errors** compared to the position-based model.
 - Scatter plots confirm better alignment between predicted and actual energies.
-
----
-
-
-
----
 
 
 
